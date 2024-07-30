@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Budget tracker/style.css">
+</head>
+<body>
+    <div class="container">
+        <form action=""id="transactionForm">
+        <h1>Add a new transaction:</h1>
+        <div class="block">
+            <div class="first">
+                <label for="">Type:<select class="sel"  id="Type">
+                    <option value="">choose one...</option>
+                    <option value="">Income</option>
+                    <option value="" >Expense</option>
+                    <option value="" >fixed-Deposite</option>
+                </select></label>
+                <label for="">Name: <input type="text" id="name"></label>
+                <!-- <input type="text"> -->
+            </div><br>
+            <label for="" class="amo">Amount:</label>
+            <input type="text" id="amo">
+          <div class="btn"><button onclick="add()">Add to transactions</button></div>
+        </div>
+        <div  class="table transaction-table">
+            <table id="mytable" class="tab">
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>options</th>
+                </tr>
+           
+            </table>
+        </div>
+        </form>
+    </div>
+    <script>
+        // function add() {
+        //    var table =document.getElementById("mytable");
+        //    var type = document.getElementById("Type").value;
+        //    var type = document.getElementById("Type1").value;
+        //    var type = document.getElementById("Type2").value;
+        //    var type = document.getElementById("Type3").value;
+        //    var name = document.getElementById("name").value;
+        //    var Amount = document.getElementById("amo").value;
+        //    var row = table.insertRow(-1); 
+        //     var cell1 = row.insertCell(0);
+        //     var cell2 = row.insertCell(1);
+        //     var cell3 = row.insertCell(2);
+        //     var cell4 = row.insertCell(3);
+        //     var cell5 = row.insertCell(4);
+        //     cell1.innerHTML = Type;
+        //     cell2.innerHTML = Type1;
+        //     cell3.innerHTML = Type2;
+        //     cell4.innerHTML = Type3;
+        //     cell5.innerHTML = name;
+        //     cell6.innerHTML = Amount;
+        //    }
+           const transactionForm = document.getElementById('transactionForm');
+        const transactionTable = document.querySelector('.transaction-table tbody');
+
+        transactionForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const type = document.getElementById('Type').value;
+            const name = document.getElementById('name').value;
+            const amount = parseFloat(document.getElementById('amo').value);
+
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = 
+                `<td>${type}</td>
+                <td>${name}</td>
+                <td>$${amount}</td>
+                <td><button class="delete-btn btn-danger btn-sm">Delete</button></td>;`
+
+            transactionTable.appendChild(newRow);
+
+            transactionTable.addEventListener('click', (event) => {
+        if (event.target.classList.contains('delete-btn')) {
+            const row = event.target.parentNode.parentNode;
+
+            row.remove();}});
+
+
+document.getElementById('type').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('amount').value = '';
+        });
+    </script>
+</body>
+</html>
